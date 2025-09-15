@@ -1,0 +1,38 @@
+# Copier configuration for Project VO2 scaffolder
+#
+# This lets you render the canonical scaffold (data_files) into a new project
+# directory with your own variables. Run:
+#   copier copy . ../my-new-project
+
+_subdirectory: src/project_vo2_scaffolder/data_files
+_exclude: []
+_tasks: []
+
+# Template variables (extend as needed)
+project_name:
+  type: str
+  help: Project name (human friendly)
+  default: Project VO2
+
+project_slug:
+  type: str
+  help: Project slug (filesystem / import safe)
+  default: project-vo2
+
+author:
+  type: str
+  help: Primary author or organization
+  default: Project VO2 Contributors
+
+description:
+  type: str
+  help: Short description of the project
+  default: Professional scaffolding for Project VO2
+
+license:
+  type: str
+  help: License identifier (e.g., MIT, Apache-2.0)
+  default: MIT
+
+# You can add more variables for the Jinja templates under templates/
+

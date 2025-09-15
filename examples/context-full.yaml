@@ -1,0 +1,27 @@
+project_name: VO2 Breath Analyzer
+project_slug: vo2-analyzer
+author: Project VO2 Contributors
+description: A professional, idempotent scaffolding of the VO2 system
+license: MIT
+
+# Example additional variables you might use in templates
+governance_model:
+  model_type: meritocratic
+  core_principle: transparency
+  identity_roadmap:
+    stage_1:
+      name: community-led prototype
+    stage_2:
+      name: foundation-backed project
+
+toolchain:
+  ECAD: KiCad 8
+  MCAD: FreeCAD 1.0
+  Diagrams: Mermaid 10
+  HPU_Software: Python 3.11
+  SFE_Firmware: Zephyr RTOS
+
+project_identity:
+  public_title: Project VO2
+  version: 0.2.0
+

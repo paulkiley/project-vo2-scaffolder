@@ -1,0 +1,29 @@
+#
+# @project: Project VO2 Scaffolder
+# @file:    pyproject.toml
+# @author:  Project VO2 Contributors
+# @brief:   Defines the Python package for the project scaffolding tool.
+#
+[project]
+name = "project-vo2-scaffolder"
+version = "0.2.0"
+description = "A professional scaffolding tool for Project VO2."
+requires-python = ">=3.8"
+
+# This creates the `vo2-init` command and points it to our main function.
+[project.scripts]
+vo2-init = "project_vo2_scaffolder.__main__:main"
+
+[tool.setuptools]
+packages = ["project_vo2_scaffolder"]
+
+# This tells setuptools to include all files within the data_files directory.
+[tool.setuptools.package-data]
+project_vo2_scaffolder = ["data_files/**/*"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,99 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-release-artifacts:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install system tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq just zip
+
+      - name: Install Python deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install jinja2 pyyaml
+
+      - name: Build manifest
+        run: |
+          bash ./populate.sh
+        working-directory: project-vo2-scaffolder
+
+      - name: Zip data_files
+        run: |
+          cd project-vo2-scaffolder/src/project_vo2_scaffolder
+          zip -r ../../data_files.zip data_files
+
+      - name: Render default docs
+        run: |
+          python3 ./render.py \
+            --context ./copier-defaults.yaml \
+            --out-dir ./_rendered \
+            --in-dir ./src/project_vo2_scaffolder/data_files/templates
+        working-directory: project-vo2-scaffolder
+
+      - name: Zip rendered docs
+        run: |
+          cd project-vo2-scaffolder
+          zip -r rendered-docs-default.zip _rendered
+
+      - name: Checksums
+        run: |
+          cd project-vo2-scaffolder
+          sha256sum file_contents.jsonl manifest_meta.json data_files.zip rendered-docs-default.zip > CHECKSUMS.txt || shasum -a 256 file_contents.jsonl manifest_meta.json data_files.zip rendered-docs-default.zip > CHECKSUMS.txt
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            project-vo2-scaffolder/file_contents.jsonl
+            project-vo2-scaffolder/manifest_meta.json
+            project-vo2-scaffolder/data_files.zip
+            project-vo2-scaffolder/rendered-docs-default.zip
+            project-vo2-scaffolder/CHECKSUMS.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-testpypi:
+    if: ${{ secrets.TEST_PYPI_API_TOKEN != '' }}
+    runs-on: ubuntu-latest
+    needs: build-release-artifacts
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build package
+        run: |
+          python -m pip install --upgrade pip build twine
+          python -m build
+        working-directory: project-vo2-scaffolder
+
+      - name: Upload to TestPyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TEST_PYPI_API_TOKEN }}
+        run: |
+          python -m twine upload \
+            --repository-url https://test.pypi.org/legacy/ \
+            dist/*
+        working-directory: project-vo2-scaffolder

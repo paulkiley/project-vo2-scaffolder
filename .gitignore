@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+.env
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Editor/OS
+.DS_Store
+.vscode/
+.idea/
+
+# Local outputs
+file_contents.jsonl
+manifest_meta.json
+_rendered/
+
+test-run/
+test-run2/
+.backups/
+.local/
+*.private.md

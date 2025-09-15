@@ -1,0 +1,66 @@
+# Project Charter: {{ project_identity.public_title }}
+
+**Version:** {{ project_identity.version }}
+
+## 1.0 Introduction
+
+This document outlines the mission, technical architecture, governance model, and roadmap for Project VO2.
+
+### 1.1 Problem Statement
+
+[TODO: Expand on the gap in the market for affordable, high-fidelity metabolic analysis tools.]
+
+### 1.2 Project Thesis
+
+By adopting a modern, distributed architecture (separating real-time data acquisition from high-level processing) and leveraging a professional, community-driven open-source model, we can create a scientific instrument with accuracy comparable to commercial systems for a fraction of the cost.
+
+### 1.3 Disclaimer
+
+This project is governed by the **Notice of Non-Commercial & Experimental Status** as detailed in the main `README.md` file.
+
+## 2.0 Governance and Strategy
+
+| Aspect                 | Detail                                                 |
+| :--------------------- | :----------------------------------------------------- |
+| **Governance Model** | `{{ governance_model.model_type }}`                    |
+| **Core Principle** | `{{ governance_model.core_principle }}`                |
+| **Business Model** | `{{ business_model.model }}`                           |
+| **Identity (Current)** | `{{ governance_model.identity_roadmap.stage_1.name }}` |
+| **Identity (Future)** | `{{ governance_model.identity_roadmap.stage_2.name }}` |
+
+## 3.0 Technical Details
+
+### 3.1 System Architecture
+
+[TODO: Insert Mermaid.js diagram of the SFE -> HPU architecture]
+
+### 3.2 Official Toolchain
+
+| Domain                      | Tool                       |
+| :-------------------------- | :------------------------- |
+| **ECAD (Schematics/PCB)** | `{{ toolchain.ECAD }}`         |
+| **MCAD (Mechanical Design)**| `{{ toolchain.MCAD }}`         |
+| **Diagrams (in Docs)** | `{{ toolchain.Diagrams }}`     |
+| **HPU Software** | `{{ toolchain.HPU_Software }}` |
+| **SFE Firmware** | `{{ toolchain.SFE_Firmware }}` |
+
+## 4.0 Architecture Decision Log
+
+A summary of all major technical decisions. See the `decisions/` directory for full details.
+
+| ID                                                                 | Title                    | Status                  |
+| :----------------------------------------------------------------- | :----------------------- | :---------------------- |
+{% for decision in decisions -%}
+| [`{{ decision.decision_id }}`](./decisions/{{ decision.decision_id }}.md) | {{ decision.title }}     | {{ decision.status }}   |
+{% endfor -%}
+
+## 5.0 Repository Strategy
+
+This project follows a decoupled, multi-repository architecture to promote modularity and independent contribution.
+
+| Repository            | Purpose                                           |
+| :-------------------- | :------------------------------------------------ |
+{% for repo in repository_strategy.repositories -%}
+| `{{ repo.name }}`     | {{ repo.purpose }}                                |
+{% endfor -%}
+

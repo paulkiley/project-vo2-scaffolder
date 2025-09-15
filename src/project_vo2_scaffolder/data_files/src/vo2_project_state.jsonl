@@ -1,0 +1,112 @@
+{
+    "@project": "Project VO2",
+    "@file": "src/vo2_project_state.jsonl",
+    "@version": "1.0.0",
+    "type": "project_identity",
+    "data": {
+        "project_name": "Project VO2",
+        "tagline": "An Open-Source Instrument for Metabolic Analysis",
+        "public_title": "Project VO2: An Open-Source Instrument",
+        "version": "v0.2.0"
+    }
+}
+{
+    "@project": "Project VO2",
+    "@file": "src/vo2_project_state.jsonl",
+    "type": "decision_log",
+    "data": {
+        "decision_id": "ARCH-001",
+        "title": "Adopt a Distributed Architecture",
+        "status": "Accepted",
+        "context": "The initial v1.0 proposal had a monolithic design. A senior EE review identified significant risks related to analog signal noise and a lack of real-time processing guarantees on a general-purpose OS.",
+        "decision": "The system will be split into two distinct components: a real-time Sensor Front-End (SFE) microcontroller and a Host Processing Unit (HPU) single-board computer. The SFE is responsible for all time-sensitive data acquisition and initial processing. The HPU is responsible for high-level data logging, user interface, and analysis.",
+        "consequences": "This increases initial hardware complexity but massively de-risks the project by isolating the most critical, time-sensitive tasks onto a dedicated, reliable platform. It allows for parallel development of firmware and software."
+    }
+}
+{
+    "@project": "Project VO2",
+    "@file": "src/vo2_project_state.jsonl",
+    "type": "decision_log",
+    "data": {
+        "decision_id": "FW-001",
+        "title": "Use C++ with PlatformIO for SFE Firmware",
+        "status": "Accepted",
+        "context": "A modern, memory-safe language like Rust was considered for its robustness. However, the project's primary goal is an accelerated path to a mature product.",
+        "decision": "The SFE firmware will be developed in C++ using the PlatformIO IDE. This leverages the vast and mature ecosystem of existing libraries for sensors and peripherals, and the wider talent pool of experienced embedded C++ developers.",
+        "consequences": "This path has lower R&D friction and allows for faster prototyping. A future migration to Rust is noted as a long-term goal for v2.0."
+    }
+}
+{
+    "@project": "Project VO2",
+    "@file": "src/vo2_project_state.jsonl",
+    "type": "decision_log",
+    "data": {
+        "decision_id": "ID-001",
+        "title": "Deprecate 'DIY' Term and Adopt Formal Disclaimer",
+        "status": "Accepted",
+        "context": "The term 'DIY' was identified as having a potentially amateur connotation and did not reflect the project's professional standards. It was also an implicit, rather than explicit, liability shield.",
+        "decision": "The 'DIY' tag will be removed from the project name and all official documentation. A formal 'Notice of Non-Commercial & Experimental Status' will be adopted and placed in the README and Project Charter. The project's official public title is 'Project VO2: An Open-Source Instrument'.",
+        "consequences": "This elevates the project's professional branding, making it more attractive to senior talent and potential funders, while providing a stronger, more explicit liability shield."
+    }
+}
+{
+    "@project": "Project VO2",
+    "@file": "src/vo2_project_state.jsonl",
+    "type": "governance_model",
+    "data": {
+        "model_type": "Evolutionary Governance Framework (Hardware Adapted)",
+        "core_principle": "A flexible, iterative process with just enough structure to ensure consistency and velocity.",
+        "roles": [
+            {"role": "Lead Integrator / Project Facilitator", "status": "Active Hat", "description": "Owns the master documents (charter, state file), manages the BOM/budget, facilitates communication, and enforces project standards."},
+            {"role": "Lead Electrical Engineer", "status": "Seeking Contributor"},
+            {"role": "Lead Firmware Developer", "status": "Seeking Contributor"},
+            {"role": "Lead Mechanical Engineer", "status": "Seeking Contributor"},
+            {"role": "Lead Software Developer (HPU)", "status": "Seeking Contributor"},
+            {"role": "Validation & Test Lead", "status": "Seeking Contributor"}
+        ],
+        "identity_roadmap": {
+            "stage_1": {"name": "Research Kit", "trigger": "v0.x through v1.0", "purpose": "Manages expectations during active development and validation."},
+            "stage_2": {"name": "Reference Design", "trigger": "Post-v1.0 Validation", "purpose": "Signals maturity and encourages wider adoption as a proven blueprint."}
+        }
+    }
+}
+{
+    "@project": "Project VO2",
+    "@file": "src/vo2_project_state.jsonl",
+    "type": "toolchain",
+    "data": {
+        "ECAD": "KiCad",
+        "MCAD": "FreeCAD",
+        "Diagrams": "Mermaid.js",
+        "HPU_Software": "Python 3 with uv",
+        "SFE_Firmware": "C++ with PlatformIO"
+    }
+}
+{
+    "@project": "Project VO2",
+    "@file": "src/vo2_project_state.jsonl",
+    "type": "business_model",
+    "data": {
+        "model": "Non-Commercial Open Source",
+        "primary_goal": "Create a high-fidelity, open-source scientific instrument for personal research and educational use.",
+        "liability_strategy": "Managed via a formal, explicit disclaimer ('Notice of Non-Commercial & Experimental Status'). The project provides a Reference Design, and the end-user is responsible for their own implementation.",
+        "future_considerations": "Potential for grant funding from organizations promoting open-source hardware and scientific tools."
+    }
+}
+{
+    "@project": "Project VO2",
+    "@file": "src/vo2_project_state.jsonl",
+    "type": "repository_strategy",
+    "data": {
+        "strategy": "Decoupled, multi-repository architecture.",
+        "repositories": [
+            {"name": "project-vo2", "purpose": "Main project hub, documentation, and submodule aggregator."},
+            {"name": "project-vo2-hardware-sfe", "purpose": "ECAD and firmware for the Sensor Front-End."},
+            {"name": "project-vo2-software-hpu", "purpose": "Python application and DevOps for the Host Processing Unit."},
+            {"name": "project-vo2-mechanical", "purpose": "MCAD files for all physical components."},
+            {"name": "gov-framework-hardware", "purpose": "Reusable governance template for open-source hardware projects."},
+            {"name": "gov-framework-software", "purpose": "Reusable governance template for open-source software projects."}
+        ]
+    }
+}
+
