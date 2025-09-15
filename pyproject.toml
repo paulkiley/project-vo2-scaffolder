@@ -27,3 +27,28 @@ project_vo2_scaffolder = ["data_files/**/*"]
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 100
+target-version = ["py311", "py310", "py39"]
+include = '\\.(py|pyi)$'
+exclude = '''
+/(\.git|\.venv|venv|build|dist|_rendered|external-imports|test-run|test-run2)/
+'''
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = [
+  "E", "F", "W",         # pycodestyle/pyflakes
+  "I",                     # isort
+  "B",                     # flake8-bugbear
+  "UP",                    # pyupgrade
+]
+ignore = [
+  "E203",  # whitespace before ':' (Black compatible)
+  "E501",  # handled by Black
+]
+exclude = [
+  ".git", ".venv", "venv", "build", "dist", "_rendered", "external-imports", "test-run", "test-run2"
+]
