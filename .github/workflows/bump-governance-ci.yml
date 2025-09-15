@@ -1,10 +1,10 @@
-name: Bump Engineering Governance CI Version
+name: Bump Governance CI Version
 
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: Engineering Governance CI version tag (e.g., v1.0.1)
+        description: Governance CI version tag (e.g., v1.0.1)
         required: true
         type: string
 
@@ -20,12 +20,12 @@ jobs:
       - name: Update ci.yml uses ref
         run: |
           v="${{ inputs.version }}"
-          sed -i "s#\(engineering-governance/.github/workflows/reusable-ci.yml@\).*#\1${v}#" .github/workflows/ci.yml
+          sed -i "s#\(vo2-governance/.github/workflows/reusable-ci.yml@\).*#\1${v}#" .github/workflows/ci.yml
       - name: Create PR
         uses: peter-evans/create-pull-request@v6
         with:
           commit-message: "ci(governance): bump reusable CI to ${{ inputs.version }}"
-          branch: "ci/bump-engineering-governance-ci-${{ inputs.version }}"
+          branch: "ci/bump-governance-ci-${{ inputs.version }}"
           title: "ci(governance): bump reusable CI to ${{ inputs.version }}"
-          body: "Update reusable engineering governance CI ref to ${{ inputs.version }}."
+          body: "Update reusable governance CI ref to ${{ inputs.version }}."
           labels: ci
