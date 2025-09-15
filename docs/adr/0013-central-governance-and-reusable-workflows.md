@@ -17,7 +17,7 @@ Create a dedicated "governance" repository with:
 
 Projects reference the reusable CI via:
 ```
-uses: paulkiley/engineering-governance/.github/workflows/reusable-ci.yml@v1
+uses: paulkiley/vo2-governance/.github/workflows/reusable-ci.yml@v1
 ```
 They can override inputs or keep defaults, and retain repo-specific jobs if needed.
 
