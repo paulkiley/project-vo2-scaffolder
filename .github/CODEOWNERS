@@ -1,0 +1,6 @@
+# Default owners
+*       @paulkiley
+
+# Scoped ownership examples (extend as needed)
+src/**  @paulkiley
+scripts/** @paulkiley
