@@ -1,0 +1,10 @@
+[allowlist]
+  description = "Ignore derived artifacts and imports"
+  paths = [
+    "file_contents.jsonl",
+    "manifest_meta.json",
+    "external-imports/",
+    "test-run/",
+    "test-run2/",
+    "_rendered/"
+  ]
