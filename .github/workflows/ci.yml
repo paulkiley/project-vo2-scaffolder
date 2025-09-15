@@ -28,6 +28,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install nox jinja2 pyyaml
 
+      - name: Generate manifest
+        run: |
+          bash ./populate.sh
+
       - name: Validate manifest (schema/content)
         run: |
           nox -s validate_manifest --error-on-missing-interpreters
