@@ -42,3 +42,7 @@ See ADRs in `docs/adr/` for rationale and tradeoffs.
   - `data_files.zip`
   - `rendered-docs-default.zip`
   - `CHECKSUMS.txt`
+
+## Git Workflow
+
+See `docs/GIT_GUIDE.md` and ADRs in `docs/adr/`.
