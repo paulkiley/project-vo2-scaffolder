@@ -1,0 +1,54 @@
+name: Notify Tighten Branch Protection Readiness
+
+on:
+  schedule:
+    - cron: '0 17 * * *'  # daily 17:00 UTC
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const title = 'Re-enable strict branch protection when initial PRs merge';
+            // Find an open issue with the title
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100,
+            });
+            const existing = issues.find(i => i.title === title);
+            // Check if any open PRs remain
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100,
+            });
+            const stillOpen = prs.length > 0;
+            const msg = stillOpen
+              ? `Status: ${prs.length} PR(s) open. Keeping protection relaxed.`
+              : 'All PRs merged. You can run the Tighten Branch Protection workflow when ready.';
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body: msg,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body: 'Tracking readiness to re-enable strict branch protection.\n' + msg,
+              });
+            }
