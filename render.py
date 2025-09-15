@@ -63,24 +63,13 @@ def ensure_parent(p: Path) -> None:
 
 def render_all(opts: Options) -> int:
     try:
-        from jinja2 import (
-            Environment,
-            FileSystemLoader,
-            StrictUndefined,
-            Undefined,
-            select_autoescape,
-        )
+        from jinja2 import Environment, FileSystemLoader, StrictUndefined, Undefined
     except ModuleNotFoundError:
         fail("Jinja2 is required. Install with: pip install jinja2")
 
-    # Enable autoescape only for HTML/XML-like outputs to mitigate XSS issues.
-    # Markdown/text templates render without autoescape by default.
     env = Environment(
         loader=FileSystemLoader(str(opts.in_dir)),
-        autoescape=select_autoescape(
-            enabled_extensions=("html", "htm", "xml", "xhtml"),
-            default_for_string=False,
-        ),
+        autoescape=False,  # Markdown and text; let templates control escaping
         undefined=StrictUndefined if opts.strict else Undefined,
         keep_trailing_newline=True,
         lstrip_blocks=False,
@@ -164,3 +153,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

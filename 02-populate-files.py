@@ -153,24 +153,24 @@ def apply_mode(path: Path, entry: FileEntry) -> None:
                 path.chmod(int(m, 8))
             else:
                 # Unexpected type; ignore
-                return
-        except (OSError, ValueError):
+                pass
+        except Exception:
             # Ignore mode errors but proceed
-            return
+            pass
     else:
         if path.suffix == ".sh" or entry.content.startswith("#!"):
             try:
                 mode = path.stat().st_mode
                 path.chmod(mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
             except FileNotFoundError:
-                return
+                pass
 
 
 def within_dir(root: Path, child: Path) -> bool:
     try:
         child.resolve().relative_to(root.resolve())
         return True
-    except ValueError:
+    except Exception:
         return False
 
 
