@@ -46,3 +46,8 @@ See ADRs in `docs/adr/` for rationale and tradeoffs.
 ## Git Workflow
 
 See `docs/GIT_GUIDE.md` and ADRs in `docs/adr/`.
+
+## Policies
+
+- See CONTRIBUTING.md for contribution workflow
+- See SECURITY.md for security reporting
