@@ -8,6 +8,6 @@ on:
 
 jobs:
   call-governance-ci:
-    uses: paulkiley/vo2-governance/.github/workflows/reusable-ci.yml@v1.0.0
+    uses: paulkiley/engineering-governance/.github/workflows/reusable-ci.yml@v1.0.0
     with:
       python-version: '3.11'
