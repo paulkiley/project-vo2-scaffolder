@@ -57,7 +57,3 @@ publish-testpypi:
   python -m pip install --upgrade twine
   TWINE_USERNAME=__token__ TWINE_PASSWORD=${TEST_PYPI_API_TOKEN:?Set TEST_PYPI_API_TOKEN} \
     python -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-
-# Run local PR readiness checks
-pr-doctor:
-  bash ./scripts/pr_doctor.sh
