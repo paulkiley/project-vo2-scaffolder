@@ -1,18 +1,35 @@
-# Contributing
+# Contributing Guide
 
-Thank you for considering contributing! Please open issues and submit pull requests for improvements.
+Thank you for your interest in contributing! This project uses a simple, review-friendly workflow.
 
 ## Workflow
-- Use short-lived branches off `main`.
-- Follow Conventional Commits.
-- Ensure CI jobs pass locally where possible.
+- Trunk-based on `main` with short-lived feature branches.
+- All changes go through Pull Requests (PRs) with CI checks.
+- Prefer squash merge for a linear history.
 
-See docs/GIT_GUIDE.md for more detail.
+## Commit Messages (Conventional Commits)
+- feat(scope): add new capability
+- fix(scope): correct a bug
+- docs(scope): documentation changes
+- chore(scope): tooling, CI, build
+- refactor(scope): no functional change
+- test(scope): tests
 
-## Pre-commit (recommended)
-Install and run hooks locally to catch issues early:
+Keep subjects short and imperative. Use body text for “why” when helpful.
 
-```
-just pre-commit-install
-just pre-commit-run
-```
+## PR Checklist
+- [ ] CI green (lint, security, docs, validate)
+- [ ] ADRs/docs updated if needed
+- [ ] No secrets or credentials committed
+- [ ] Conventional commit(s)
+
+## Local Development
+- Tasks: `just` shows available commands
+- Build manifest: `just db`, validate: `just validate`, verify: `just verify`
+- Lint locally (optional): `ruff check .` and `black --check .`
+
+## Reporting Issues
+- Use issue templates for bugs and feature requests. Include steps to reproduce and context.
+
+## Code of Conduct
+- Be respectful and constructive. Assume good intent. Help others succeed.
