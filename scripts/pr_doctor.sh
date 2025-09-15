@@ -43,3 +43,9 @@ fi
 
 if [[ $status -eq 0 ]]; then ok "PR doctor checks passed"; else err "PR doctor found issues"; fi
 exit $status
+
+# Pre-commit aggregate (optional)
+if command -v pre-commit >/dev/null 2>&1; then
+  if ! pre-commit run -a; then warn "pre-commit hooks found issues"; status=1; fi
+else warn "pre-commit not installed; skipping"; fi
+
