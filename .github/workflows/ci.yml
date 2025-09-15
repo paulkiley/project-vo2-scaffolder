@@ -7,48 +7,7 @@ on:
     branches: [ main, master ]
 
 jobs:
-  build-validate:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install system tools
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq just zip
-
-      - name: Install Python deps
-        run: |
-          python -m pip install --upgrade pip
-          pip install nox jinja2 pyyaml
-
-      - name: Validate manifest
-        run: |
-          nox -s validate_manifest --error-on-missing-interpreters
-        working-directory: project-vo2-scaffolder
-
-      - name: Verify manifest matches sources
-        run: |
-          bash ./verify.sh
-        working-directory: project-vo2-scaffolder
-
-      - name: Render default docs
-        run: |
-          python3 ./render.py \
-            --context ./copier-defaults.yaml \
-            --out-dir ./_rendered \
-            --in-dir ./src/project_vo2_scaffolder/data_files/templates
-        working-directory: project-vo2-scaffolder
-
-      - name: Upload rendered docs
-        uses: actions/upload-artifact@v4
-        with:
-          name: rendered-docs
-          path: project-vo2-scaffolder/_rendered
-
+  call-governance-ci:
+    uses: paulkiley/engineering-governance/.github/workflows/reusable-ci.yml@v1.0.0
+    with:
+      python-version: '3.11'
