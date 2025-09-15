@@ -61,3 +61,12 @@ publish-testpypi:
 # Run local PR readiness checks
 pr-doctor:
   bash ./scripts/pr_doctor.sh
+
+# Install pre-commit and set up git hooks
+pre-commit-install:
+  python3 -m pip install --upgrade pre-commit
+  pre-commit install
+
+# Run all pre-commit hooks against the repo
+pre-commit-run:
+  pre-commit run -a
