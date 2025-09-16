@@ -1,0 +1,291 @@
+schema_version: 1
+generated_at: 2025-09-15T00:00:00Z
+work_items:
+  - id: WI-2025-0001
+    title: Bootstrap .work ledger, schemas, governance-doctor, and context bundle
+    description: >
+      Add .work/backlog.yaml and .work/decisions.yaml schemas + validation; add governance-doctor
+      reusable workflow validation in CI; add scripts/work.* CLI helpers and scripts/context_bundle.sh;
+      add Just targets (work-*, context).
+    repos: [paulkiley/engineering-governance, paulkiley/project-vo2-scaffolder]
+    status: in_progress
+    type: governance
+    priority: P0
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: []
+    links:
+      adr: [ADR-0013]
+      pr: []
+      module: []
+    deliverables:
+      - .work/backlog.yaml + .work/decisions.yaml
+      - .work/schema/backlog.schema.json + decisions.schema.json
+      - .github/workflows/work-ledger-validate.yml
+      - scripts/context_bundle.sh + Just context
+      - scripts/work.py + Just work-*
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0002
+    title: Stabilize and merge all open PRs (#1–#15) in project-vo2-scaffolder
+    description: >
+      Re-trigger CI for all open PRs; fix branch-specific failures (lint, docs, governance, security)
+      minimally and push until green; or integrate via a single batch PR and merge when CI is green.
+    repos: [paulkiley/project-vo2-scaffolder]
+    status: in_progress
+    type: ci
+    priority: P0
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: []
+    links:
+      pr: ["#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10", "#11", "#12", "#13", "#14", "#15"]
+      module:
+        - engineering-academy/modules/ci-manifest-generation.md
+        - engineering-academy/modules/security-jinja2-autoescape.md
+        - engineering-academy/modules/branch-protection-strategy.md
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0003
+    title: Bump project-vo2-scaffolder to engineering-governance v1.1.1
+    description: >
+      After CI migration PRs land, bump reusable CI and governance-check to engineering-governance
+      v1.1.1 (includes guidance comments linking to academy modules).
+    repos: [paulkiley/project-vo2-scaffolder]
+    status: planned
+    type: governance
+    priority: P1
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: [WI-2025-0002]
+    links:
+      pr: []
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0004
+    title: Archive legacy vo2-governance repository
+    description: >
+      Deprecate vo2-governance with a README pointing to engineering-governance and archive it
+      to avoid drift and confusion.
+    repos: [paulkiley/vo2-governance]
+    status: planned
+    type: governance
+    priority: P1
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: []
+    links: {decisions: [DEC-2025-0007]}
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0005
+    title: Add CodeQL to engineering-governance and adopt here
+    description: >
+      Add CodeQL to engineering-governance as a reusable job; open PR in project-vo2-scaffolder to
+      adopt it alongside existing checks.
+    repos: [paulkiley/engineering-governance, paulkiley/project-vo2-scaffolder]
+    status: planned
+    type: security
+    priority: P1
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: [WI-2025-0002]
+    links: {decisions: [DEC-2025-0003]}
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0006
+    title: Roll out pre-commit configuration to other public repositories
+    description: >
+      Open PRs across public repos to add .pre-commit-config.yaml, pre-commit workflow, and Just
+      tasks; update CONTRIBUTING. Use engineering-governance baseline. Coordinate in batches.
+    repos: ["<multi-repo>"]
+    status: planned
+    type: devx
+    priority: P2
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: [WI-2025-0002]
+    links:
+      script: engineering-governance/scripts/bulk_bump_workflow_refs.sh
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0007
+    title: Implement initial, non-blocking repository rulesets
+    description: >
+      Add soft rulesets (required checks, conversations resolved, linear history) in project-vo2-scaffolder.
+      Keep approvals relaxed for now; schedule strict mode later.
+    repos: [paulkiley/project-vo2-scaffolder]
+    status: planned
+    type: governance
+    priority: P2
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: [WI-2025-0002, WI-2025-0005]
+    links: {decisions: [DEC-2025-0003, DEC-2025-0006]}
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0008
+    title: Governance-check strictness toggle & .governance-version
+    description: >
+      Tag engineering-governance v1.1.2 with 'require-templates' default=false (lenient). Introduce
+      .governance-version in repos and a doctor step to enforce minimum tag; opt-in strict mode per repo.
+    repos: [paulkiley/engineering-governance, paulkiley/project-vo2-scaffolder]
+    status: planned
+    type: governance
+    priority: P1
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: [WI-2025-0001]
+    links: {}
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0009
+    title: CI Health Check (scheduled) to detect non-attached checks (>60m)
+    description: >
+      Add a scheduled workflow in engineering-governance to scan open PRs and flag any where
+      required checks have not attached for > 60 minutes. Label/comment the PR and open a WI entry.
+    repos: [paulkiley/engineering-governance]
+    status: planned
+    type: tooling
+    priority: P1
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: []
+    links: {decisions: []}
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0010
+    title: ADR: Large-Scale Change Integration (Integration Batch SOP)
+    description: >
+      Draft and publish an ADR in engineering-governance that formalizes the Integration Batch Strategy
+      with thresholds (>=3 PRs or >60m non-attachment) and step-by-step SOP. Reference in governance docs.
+    repos: [paulkiley/engineering-governance]
+    status: planned
+    type: policy
+    priority: P1
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: []
+    links: {decisions: []}
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0011
+    title: Academy Module: From CI Logjams to Integration Batches
+    description: >
+      Create a new engineering-academy module documenting the CI logjam incident, rationale for
+      the Integration Batch Strategy, and hands-on exercises. Link from CI guidance comments.
+    repos: [paulkiley/engineering-academy]
+    status: planned
+    type: education
+    priority: P1
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: []
+    links: {decisions: []}
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0012
+    title: Add CodeQL reusable workflow and adopt in scaffolder
+    description: >
+      Add a CodeQL analysis reusable job to engineering-governance and call it from
+      project-vo2-scaffolder alongside existing checks.
+    repos: [paulkiley/engineering-governance, paulkiley/project-vo2-scaffolder]
+    status: planned
+    type: security
+    priority: P1
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: [WI-2025-0002]
+    links: {decisions: []}
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0013
+    title: .governance-version + doctor enforcement across repos
+    description: >
+      Introduce a .governance-version file and a governance-doctor check to enforce a minimum
+      governance tag across repositories. Fail CI when out of date.
+    repos: [paulkiley/engineering-governance, "<multi-repo>"]
+    status: planned
+    type: governance
+    priority: P1
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: [WI-2025-0001]
+    links: {decisions: []}
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0014
+    title: Repository Rulesets (soft baseline) then tighten
+    description: >
+      Add a soft baseline ruleset (required checks, conversations resolved, linear history) to
+      project-vo2-scaffolder; later enable CODEOWNERS approval and signed commits on schedule.
+    repos: [paulkiley/project-vo2-scaffolder]
+    status: planned
+    type: governance
+    priority: P2
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: [WI-2025-0002, WI-2025-0012]
+    links: {decisions: []}
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0015
+    title: Compliance Module (release v1.0) + static enforcement check
+    description: >
+      Implement the Agent Compliance Module in engineering-governance (execute_monitored_task)
+      and extend governance-doctor with a static check that agent code imports and uses it.
+    repos: [paulkiley/engineering-governance]
+    status: planned
+    type: tooling
+    priority: P2
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: [WI-2025-0001]
+    links: {decisions: []}
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0016
+    title: No-op re-trigger helper for attaching runs
+    description: >
+      Provide a standardized helper in engineering-governance to push a no-op change or use
+      the API to reliably attach runs when workflows change and the provider returns no latest run.
+    repos: [paulkiley/engineering-governance]
+    status: planned
+    type: tooling
+    priority: P2
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: []
+    links: {decisions: []}
+    created_at: 2025-09-15T00:00:00Z
+    updated_at: 2025-09-15T00:00:00Z
+
+  - id: WI-2025-0023
+    title: Implement Agent Work Trace Payload
+    epic_id: EPIC-03
+    priority: P1
+    type: tooling
+    narrative: >
+      As a founder and agent supervisor, I want the agent to provide a full, structured 'trace' payload
+      including commands, diagnostics, and state changes so that its debugging and decision-making are
+      fully transparent, auditable, and useful for performance analysis.
+    deliverables:
+      - message dataclass + serializer usage in all protocol messages
+      - governance-doctor static check that enforces serializer usage
+      - persisted trace entries in .work/agent_action.log for significant actions
+    created_at: $(date -u +%Y-%m-%dT%H:%M:%SZ)
+    updated_at: $(date -u +%Y-%m-%dT%H:%M:%SZ)
