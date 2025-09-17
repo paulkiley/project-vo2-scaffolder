@@ -289,3 +289,46 @@ work_items:
       - persisted trace entries in .work/agent_action.log for significant actions
     created_at: $(date -u +%Y-%m-%dT%H:%M:%SZ)
     updated_at: $(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+  - id: WI-2025-0024
+    title: Create Just Target for Onboarding Directive
+    description: >
+      Add a `Just` target to print the persisted Agent Onboarding & Operations Manual
+      JSONL so new agent instances can be bootstrapped quickly and repeatably.
+      Target name: `show-onboarding-directive`.
+    repos: [paulkiley/project-vo2-scaffolder]
+    status: done
+    type: tooling
+    priority: P2
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: []
+    deliverables:
+      - Just target `show-onboarding-directive` in `Justfile`
+      - Prints `.agent_workdir/directives/onboarding_and_operations_manual.jsonl`
+    created_at: 2025-09-16T00:00:00Z
+    updated_at: 2025-09-16T00:05:00Z
+
+  - id: WI-2025-0025
+    title: STORY-703 - Implement Declarative Developer Environment with Nix
+    description: >
+      Define a reproducible, declarative development environment using Nix (flakes + devshell)
+      so contributors and agents have a consistent toolchain (just, nox, ruff, jq, yq, python,
+      copier, pre-commit, jsonschema) without manual setup. Integrate with direnv and document
+      usage. Add CI checks to validate the flake.
+    repos: [paulkiley/project-vo2-scaffolder]
+    status: in_progress
+    type: devx
+    priority: P0
+    owner: agent
+    reviewers: [paulkiley]
+    depends_on: []
+    deliverables:
+      - flake.nix + flake.lock (pinned)
+      - devshell with required tools on PATH
+      - .envrc with `use flake` and quick start docs
+      - Just targets: nix-info, nix-develop, nix-check
+      - CI job: `nix flake check` (non-blocking initially)
+      - README section: Nix quickstart
+    created_at: 2025-09-16T00:05:00Z
+    updated_at: 2025-09-16T00:05:00Z
