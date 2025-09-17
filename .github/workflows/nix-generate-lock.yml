@@ -1,0 +1,44 @@
+name: Nix Generate Lockfile
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Git ref (branch) to lock
+        required: true
+        default: story-703-nix-dev-env
+
+permissions:
+  contents: write
+
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout target ref
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          nix_path: nixpkgs=channel:nixos-24.05
+
+      - name: Generate flake.lock
+        run: |
+          nix --version
+          nix flake lock --show-trace
+          test -f flake.lock && echo "flake.lock generated"
+
+      - name: Commit flake.lock
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add flake.lock
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore(nix): add/update flake.lock"
+            git push
+          fi
