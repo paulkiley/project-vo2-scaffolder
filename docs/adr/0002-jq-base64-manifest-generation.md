@@ -27,4 +27,3 @@ Implement `populate.sh` to:
 
 - Python-only builder: viable but increases coupling to Python runtime for a simple packaging task
 - Tarball + manifest: heavier weight; less readable diffs
-

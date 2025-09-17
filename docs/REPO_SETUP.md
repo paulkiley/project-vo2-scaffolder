@@ -71,4 +71,3 @@ Notes:
 
 - Python in the dev shell already includes `pyyaml` and `jsonschema`, so `python3 scripts/work.py validate` will run without extra installation.
 - If you don’t have `just` installed globally, use `nix develop -c just <target>`.
-

@@ -1,3 +1,4 @@
+---
 schema_version: 1
 generated_at: 2025-09-15T00:00:00Z
 work_items:
@@ -163,7 +164,7 @@ work_items:
     updated_at: 2025-09-15T00:00:00Z
 
   - id: WI-2025-0010
-    title: ADR: Large-Scale Change Integration (Integration Batch SOP)
+    title: "ADR: Large-Scale Change Integration (Integration Batch SOP)"
     description: >
       Draft and publish an ADR in engineering-governance that formalizes the Integration Batch Strategy
       with thresholds (>=3 PRs or >60m non-attachment) and step-by-step SOP. Reference in governance docs.
@@ -179,7 +180,7 @@ work_items:
     updated_at: 2025-09-15T00:00:00Z
 
   - id: WI-2025-0011
-    title: Academy Module: From CI Logjams to Integration Batches
+    title: "Academy Module: From CI Logjams to Integration Batches"
     description: >
       Create a new engineering-academy module documenting the CI logjam incident, rationale for
       the Integration Batch Strategy, and hands-on exercises. Link from CI guidance comments.
@@ -326,9 +327,9 @@ work_items:
     deliverables:
       - flake.nix + flake.lock (pinned)
       - devshell with required tools on PATH
-      - .envrc with `use flake` and quick start docs
+      - ".envrc with `use flake` and quick start docs"
       - Just targets: nix-info, nix-develop, nix-check
-      - CI job: `nix flake check` (non-blocking initially)
+      - "CI job: `nix flake check` (non-blocking initially)"
       - README section: Nix quickstart
     created_at: 2025-09-16T00:05:00Z
     updated_at: 2025-09-16T00:05:00Z

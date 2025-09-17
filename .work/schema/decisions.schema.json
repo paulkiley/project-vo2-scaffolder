@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schema_version", "decisions"],
+  "properties": {
+    "schema_version": {"type": "integer"},
+    "generated_at": {"type": "string"},
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "date", "status", "rationale"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^DEC-\\d{4}-\\d{4}$"},
+          "title": {"type": "string"},
+          "date": {"type": "string"},
+          "status": {"type": "string"},
+          "rationale": {"type": "string"},
+          "links": {"type": "object"}
+        }
+      }
+    }
+  }
+}

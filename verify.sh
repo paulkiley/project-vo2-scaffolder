@@ -19,4 +19,3 @@ if diff -u "$BASE" "$TMP"; then
 else
   error "Manifest differs from source files. See diff above. Keep temporary file: $TMP"
 fi
-

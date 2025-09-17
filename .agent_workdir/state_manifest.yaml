@@ -1,0 +1,13 @@
+current_task_id: 'WI-2025-0002'
+active_resource_url: 'https://github.com/paulkiley/project-vo2-scaffolder/pull/16'
+working_directory_path: '/Users/paulkiley/workspace/github/paulkiley/project-vo2-scaffolder/.agent_workdir'
+active_branch: 'integration-batch-1'
+last_action:
+  command: 'git status'
+  timestamp: '2025-09-15T23:10:13Z'
+  status: 'completed'
+  output_summary: 'Changes present (branch: integration-batch-1)'
+next_action:
+  command: 'gh run list --workflow CI --branch integration-batch-1 --limit 1'
+  description: 'Poll for CI run status on the active branch.'
+last_known_ci_status: 'PENDING/QUEUED'

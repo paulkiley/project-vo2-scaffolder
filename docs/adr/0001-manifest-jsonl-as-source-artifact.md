@@ -23,4 +23,3 @@ Use a deterministically generated JSON Lines (JSONL) manifest (`file_contents.js
 
 - Heredocs: fragile escaping; hard to maintain
 - Tarball checked into repo: opaque diffs; poor reviewability
-

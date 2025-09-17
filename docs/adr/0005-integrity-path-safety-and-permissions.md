@@ -24,4 +24,3 @@ Materializing files from a manifest must be safe (no path traversal), correct (b
 ## Alternatives Considered
 
 - Trust content implicitly: less safe; hard to audit
-

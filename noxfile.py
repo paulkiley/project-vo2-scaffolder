@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import base64
 import json
-import os
 from pathlib import Path
 
 import nox
@@ -92,8 +91,14 @@ def validate_manifest(session: nox.Session) -> None:
             # Optional mode/executable sanity
             if "mode" in obj:
                 m = str(obj["mode"]).strip()
-                if not m or any(ch not in "01234567" for ch in m) or len(m) not in (3, 4):
-                    session.error(f"Line {i}: invalid mode '{obj['mode']}' (expect octal like 0644)")
+                if (
+                    not m
+                    or any(ch not in "01234567" for ch in m)
+                    or len(m) not in (3, 4)
+                ):
+                    session.error(
+                        f"Line {i}: invalid mode '{obj['mode']}' (expect octal like 0644)"
+                    )
                 # Check exec flag consistency if provided
                 if "executable" in obj and isinstance(obj["executable"], bool):
                     perm = int(m if len(m) == 4 else "0" + m, 8)

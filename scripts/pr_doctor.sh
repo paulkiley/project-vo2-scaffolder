@@ -48,4 +48,3 @@ exit $status
 if command -v pre-commit >/dev/null 2>&1; then
   if ! pre-commit run -a; then warn "pre-commit hooks found issues"; status=1; fi
 else warn "pre-commit not installed; skipping"; fi
-

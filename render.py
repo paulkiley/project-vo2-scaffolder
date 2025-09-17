@@ -20,10 +20,10 @@ import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, NoReturn
 
 
-def fail(msg: str) -> "NoReturn":  # type: ignore[name-defined]
+def fail(msg: str) -> NoReturn:
     print(f"[ERROR] {msg}", file=sys.stderr)
     raise SystemExit(1)
 
@@ -36,7 +36,7 @@ def load_context(path: Path) -> Dict[str, Any]:
         import yaml  # type: ignore
 
         return yaml.safe_load(text) or {}
-    except ModuleNotFoundError as e:
+    except ModuleNotFoundError:
         fail(
             "PyYAML is required for non-JSON contexts. Install with: pip install pyyaml\n"
             f"Tried to load: {path}"
@@ -137,9 +137,15 @@ def parse_args(argv: list[str]) -> Options:
         required=True,
         help="Context file (YAML or JSON)",
     )
-    parser.add_argument("--strict", action="store_true", help="Fail on undefined variables")
-    parser.add_argument("--dry-run", action="store_true", help="List actions without writing files")
-    parser.add_argument("--overwrite", action="store_true", help="Overwrite existing files")
+    parser.add_argument(
+        "--strict", action="store_true", help="Fail on undefined variables"
+    )
+    parser.add_argument(
+        "--dry-run", action="store_true", help="List actions without writing files"
+    )
+    parser.add_argument(
+        "--overwrite", action="store_true", help="Overwrite existing files"
+    )
 
     args = parser.parse_args(argv)
     return Options(
