@@ -1,3 +1,4 @@
+---
 audit_version: 1
 timestamp_utc: "2025-09-16T18:27:38Z"
 workspace_root: /Users/paulkiley/workspace/github/paulkiley/project-vo2-scaffolder
@@ -7,11 +8,11 @@ os:
   system: Darwin
   release: 24.6.0
   python: 3.13.7
-  sw_vers: 
-    ProductName:		macOS
-    ProductVersion:		15.6.1
-    BuildVersion:		24G90
-  uname: 
+  sw_vers:
+    ProductName: macOS
+    ProductVersion: 15.6.1
+    BuildVersion: 24G90
+  uname:
     Darwin Pauls-MacBook-Pro-321.local 24.6.0 Darwin Kernel Version 24.6.0: Mon Jul 14 11:30:29 PDT 2025; root:xnu-11417.140.69~1/RELEASE_ARM64_T6000 arm64
 repo:
   toplevel: /Users/paulkiley/workspace/github/paulkiley/project-vo2-scaffolder
@@ -135,7 +136,7 @@ tools:
 just_tasks:
   list: []
 state_manifest_snapshot:
-|
+  |
   current_task_id: 'WI-2025-0002'
   active_resource_url: 'https://github.com/paulkiley/project-vo2-scaffolder/pull/16'
   working_directory_path: '/Users/paulkiley/workspace/github/paulkiley/project-vo2-scaffolder/.agent_workdir'
@@ -151,5 +152,5 @@ state_manifest_snapshot:
   last_known_ci_status: 'PENDING/QUEUED'
 intent:
   phase: "Phase 1: Agent State & Intent Audit"
-  notes: 
+  notes:
     Pivot acknowledged. Establishing a clean baseline of environment, tooling, and repo state before codifying usage patterns (Phase 2) and rationalizing the custom framework (Phase 3).

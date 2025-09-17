@@ -8,11 +8,11 @@ provided strategic pivot JSONL directive to `.agent_workdir/directives/`.
 
 This script uses only the Python standard library.
 """
+
 from __future__ import annotations
 
 import datetime as _dt
 import json
-import os
 from pathlib import Path
 import platform
 import shutil
@@ -20,7 +20,9 @@ import subprocess
 from typing import Dict, List, Tuple
 
 
-def run(cmd: List[str], cwd: Path | None = None, timeout: int = 15) -> Tuple[int, str, str]:
+def run(
+    cmd: List[str], cwd: Path | None = None, timeout: int = 15
+) -> Tuple[int, str, str]:
     try:
         p = subprocess.run(
             cmd,
@@ -72,11 +74,15 @@ def file_counts(root: Path) -> Dict[str, int]:
     counts: Dict[str, int] = {}
     # Prefer ripgrep if available
     if shutil.which("rg"):
-        code, out, _ = run(["rg", "--files", "--hidden", "--glob", "!**/.git/**"], cwd=root)
+        code, out, _ = run(
+            ["rg", "--files", "--hidden", "--glob", "!**/.git/**"], cwd=root
+        )
         files = out.splitlines() if code == 0 else []
         counts["files_total"] = len(files)
     else:
-        files = [str(p) for p in root.rglob("*") if p.is_file() and ".git" not in str(p)]
+        files = [
+            str(p) for p in root.rglob("*") if p.is_file() and ".git" not in str(p)
+        ]
         counts["files_total"] = len(files)
     counts["adrs"] = len(list((root / "docs/adr").glob("[0-9][0-9][0-9][0-9]-*.md")))
     return counts
@@ -162,7 +168,7 @@ def write_audit_yaml(out_path: Path, data: Dict[str, object]) -> None:
         return "|\n" + "\n".join(pad + ln for ln in lines)
 
     lines: List[str] = []
-    lines.append(f"audit_version: 1")
+    lines.append("audit_version: 1")
     lines.append(f"timestamp_utc: {dump_scalar(data['timestamp_utc'])}")
     lines.append(f"workspace_root: {dump_scalar(data['workspace_root'])}")
     lines.append(f"chat_title_protocol: {dump_scalar(data['chat_title_protocol'])}")
@@ -291,7 +297,12 @@ def main() -> int:
     write_audit_yaml(audit_out, audit)
 
     # Persist directive JSONL for new sessions
-    dir_out = repo_root / ".agent_workdir" / "directives" / f"{today}_initiate_strategic_pivot.jsonl"
+    dir_out = (
+        repo_root
+        / ".agent_workdir"
+        / "directives"
+        / f"{today}_initiate_strategic_pivot.jsonl"
+    )
     write_directive_jsonl(dir_out)
 
     print(f"Wrote audit: {audit_out}")
@@ -301,4 +312,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
