@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '0 17 * * *'  # daily 17:00 UTC
   push:
-    branches: [ main ]
+    branches: [main]
 
 permissions:
   contents: read

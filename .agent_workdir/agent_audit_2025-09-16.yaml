@@ -1,0 +1,156 @@
+---
+audit_version: 1
+timestamp_utc: "2025-09-16T18:27:38Z"
+workspace_root: /Users/paulkiley/workspace/github/paulkiley/project-vo2-scaffolder
+chat_title_protocol: "YYYY-MM-DD | Agent Task: <WI-ID> - <Brief Description>"
+os:
+  platform: macOS-15.6.1-arm64-arm-64bit-Mach-O
+  system: Darwin
+  release: 24.6.0
+  python: 3.13.7
+  sw_vers:
+    ProductName: macOS
+    ProductVersion: 15.6.1
+    BuildVersion: 24G90
+  uname:
+    Darwin Pauls-MacBook-Pro-321.local 24.6.0 Darwin Kernel Version 24.6.0: Mon Jul 14 11:30:29 PDT 2025; root:xnu-11417.140.69~1/RELEASE_ARM64_T6000 arm64
+repo:
+  toplevel: /Users/paulkiley/workspace/github/paulkiley/project-vo2-scaffolder
+  branch: integration-batch-1
+  commit: 7a6c8cd
+  remote_origin: "https://github.com/paulkiley/project-vo2-scaffolder.git"
+  changes_count: 7
+  is_clean: false
+files:
+  files_total: 81
+  adrs: 14
+tools:
+  black:
+    present: true
+    version: "black, 24.4.2 (compiled: yes)"
+    path: /Users/paulkiley/.local/bin/black
+  bun:
+    present: false
+    version: ""
+    path: ""
+  cargo:
+    present: true
+    version: cargo 1.70.0 (ec8a8a0ca 2023-04-25)
+    path: /Users/paulkiley/.cargo/bin/cargo
+  copier:
+    present: false
+    version: ""
+    path: ""
+  git:
+    present: true
+    version: git version 2.51.0
+    path: /opt/homebrew/bin/git
+  go:
+    present: false
+    version: ""
+    path: ""
+  hatch:
+    present: true
+    version: Hatch, version 1.12.0
+    path: /Users/paulkiley/.local/bin/hatch
+  java:
+    present: true
+    version: The operation couldn’t be completed. Unable to locate a Java Runtime.
+    path: /usr/bin/java
+  jq:
+    present: true
+    version: jq-1.8.1
+    path: /opt/homebrew/bin/jq
+  just:
+    present: false
+    version: ""
+    path: ""
+  node:
+    present: false
+    version: ""
+    path: ""
+  nox:
+    present: false
+    version: ""
+    path: ""
+  npm:
+    present: false
+    version: ""
+    path: ""
+  pip:
+    present: true
+    version: ""
+    path: /opt/homebrew/bin/pip
+  pipx:
+    present: true
+    version: 1.7.1
+    path: /opt/homebrew/bin/pipx
+  pnpm:
+    present: false
+    version: ""
+    path: ""
+  poetry:
+    present: true
+    version: Poetry (version 1.8.3)
+    path: /Users/paulkiley/.local/bin/poetry
+  pre-commit:
+    present: true
+    version: pre-commit 4.3.0
+    path: /opt/homebrew/bin/pre-commit
+  pytest:
+    present: false
+    version: ""
+    path: ""
+  python3:
+    present: true
+    version: Python 3.13.7
+    path: /opt/homebrew/bin/python3
+  rg:
+    present: true
+    version: ripgrep 13.0.0
+    path: /Users/paulkiley/.cargo/bin/rg
+  ruby:
+    present: true
+    version: "ruby 2.6.10p210 (2022-04-12 revision 67958) [universal.arm64e-darwin24]"
+    path: /usr/bin/ruby
+  ruff:
+    present: false
+    version: ""
+    path: ""
+  rustc:
+    present: true
+    version: rustc 1.70.0 (90c541806 2023-05-31)
+    path: /Users/paulkiley/.cargo/bin/rustc
+  tox:
+    present: false
+    version: ""
+    path: ""
+  uv:
+    present: true
+    version: uv 0.8.13 (ede75fe62 2025-08-21)
+    path: /Users/paulkiley/.local/bin/uv
+  yq:
+    present: true
+    version: "yq (https://github.com/mikefarah/yq/) version v4.47.2"
+    path: /opt/homebrew/bin/yq
+just_tasks:
+  list: []
+state_manifest_snapshot:
+  |
+  current_task_id: 'WI-2025-0002'
+  active_resource_url: 'https://github.com/paulkiley/project-vo2-scaffolder/pull/16'
+  working_directory_path: '/Users/paulkiley/workspace/github/paulkiley/project-vo2-scaffolder/.agent_workdir'
+  active_branch: 'integration-batch-1'
+  last_action:
+    command: 'git status'
+    timestamp: '2025-09-15T23:10:13Z'
+    status: 'completed'
+    output_summary: 'Changes present (branch: integration-batch-1)'
+  next_action:
+    command: 'gh run list --workflow CI --branch integration-batch-1 --limit 1'
+    description: 'Poll for CI run status on the active branch.'
+  last_known_ci_status: 'PENDING/QUEUED'
+intent:
+  phase: "Phase 1: Agent State & Intent Audit"
+  notes:
+    Pivot acknowledged. Establishing a clean baseline of environment, tooling, and repo state before codifying usage patterns (Phase 2) and rationalizing the custom framework (Phase 3).

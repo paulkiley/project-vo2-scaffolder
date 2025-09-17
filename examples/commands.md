@@ -30,4 +30,3 @@ Copy the scaffold as a new project via Copier:
 ```
 just copier DEST=../my-new-project
 ```
-

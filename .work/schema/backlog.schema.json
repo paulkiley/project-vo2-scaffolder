@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["schema_version", "work_items"],
+  "properties": {
+    "schema_version": {"type": "integer"},
+    "generated_at": {"type": "string"},
+    "work_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "status", "priority", "type"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^WI-\\d{4}-\\d{4}$"},
+          "title": {"type": "string"},
+          "description": {"type": "string"},
+          "repos": {"type": "array", "items": {"type": "string"}},
+          "status": {"type": "string", "enum": ["planned", "in_progress", "blocked", "ready_for_review", "done"]},
+          "type": {"type": "string"},
+          "priority": {"type": "string", "enum": ["P0", "P1", "P2"]},
+          "owner": {"type": "string"},
+          "reviewers": {"type": "array", "items": {"type": "string"}},
+          "depends_on": {"type": "array", "items": {"type": "string"}},
+          "links": {"type": "object"},
+          "deliverables": {"type": "array", "items": {"type": "string"}},
+          "created_at": {"type": "string"},
+          "updated_at": {"type": "string"}
+        }
+      }
+    }
+  }
+}

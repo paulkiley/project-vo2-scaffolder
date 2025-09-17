@@ -59,4 +59,3 @@ for file in "${SOURCE_FILES[@]}"; do
 done
 
 success "Project scaffolding is complete."
-

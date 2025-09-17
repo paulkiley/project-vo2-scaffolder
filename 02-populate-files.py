@@ -96,7 +96,7 @@ def _parse_line_forgiving(raw: str) -> FileEntry:
             # Count number of consecutive backslashes immediately before j
             b = 0
             k2 = j - 1
-            while k2 >= start and raw[k2] == '\\':
+            while k2 >= start and raw[k2] == "\\":
                 b += 1
                 k2 -= 1
             if b % 2 == 0:  # even -> quote is not escaped
@@ -111,9 +111,13 @@ def _parse_line_forgiving(raw: str) -> FileEntry:
         content = ast.literal_eval('"' + content_escaped + '"')
     except Exception:
         # As a last resort, replace escaped newlines and tabs manually.
-        content = content_escaped.replace('\\n', '\n').replace('\\t', '\t').replace('\\r', '\r')
+        content = (
+            content_escaped.replace("\\n", "\n")
+            .replace("\\t", "\t")
+            .replace("\\r", "\r")
+        )
     # Remove stray backslashes that precede quotes introduced by over-escaping.
-    content = content.replace('\"', '"')
+    content = content.replace('"', '"')
     return FileEntry(path=Path(path), content=content)
 
 
@@ -188,11 +192,15 @@ def write_files(entries: list[FileEntry]) -> int:
         # Integrity checks
         content_bytes = entry.content.encode("utf-8")
         if entry.size_bytes is not None and entry.size_bytes != len(content_bytes):
-            error(f"Size mismatch for {dest}: expected {entry.size_bytes}, got {len(content_bytes)}")
+            error(
+                f"Size mismatch for {dest}: expected {entry.size_bytes}, got {len(content_bytes)}"
+            )
         if entry.sha256 is not None:
             digest = hashlib.sha256(content_bytes).hexdigest()
             if digest != entry.sha256:
-                error(f"SHA256 mismatch for {dest}: expected {entry.sha256}, got {digest}")
+                error(
+                    f"SHA256 mismatch for {dest}: expected {entry.sha256}, got {digest}"
+                )
 
         ensure_parent(dest)
         # Write exactly as provided; do not add extra newline unless present.

@@ -1,0 +1,70 @@
+schema_version: 1
+generated_at: 2025-09-15T00:00:00Z
+decisions:
+  - id: DEC-2025-0001
+    title: Engineering-governance is the single source of truth
+    date: 2025-09-15
+    status: accepted
+    rationale: >
+      Avoid policy drift by centralizing reusable CI, governance checks, templates, and ADRs in a
+      generic repo referenced by tag from all projects.
+    links:
+      repo: https://github.com/paulkiley/engineering-governance
+
+  - id: DEC-2025-0002
+    title: Adopt a machine-readable ledger (.work/) for governance work tracking
+    date: 2025-09-15
+    status: accepted
+    rationale: >
+      Mitigate context-window and memory risks by codifying work and decisions as YAML, validated in CI,
+      instead of relying on conversational history or issues for governance tasks.
+    links:
+      adr: ADR-0013
+
+  - id: DEC-2025-0003
+    title: Zero-trust operational stance with automated checks
+    date: 2025-09-15
+    status: accepted
+    rationale: >
+      Assume forgetfulness and mistakes; block merges via required checks (lint, security, docs, governance),
+      and later approvals/code owners for sensitive paths. Keep defaults lenient early; tighten deliberately.
+    links:
+      adr: [ADR-0008, ADR-0011]
+
+  - id: DEC-2025-0004
+    title: Education repository (engineering-academy) and RCA update loop
+    date: 2025-09-15
+    status: accepted
+    rationale: >
+      Teach through real incidents and fixes; each RCA updates or adds a module with context, failure,
+      fix, policy links, and exercises. CI guidance comments link to modules.
+    links:
+      repo: https://github.com/paulkiley/engineering-academy
+
+  - id: DEC-2025-0005
+    title: Pin reusable workflows by tag; bump intentionally
+    date: 2025-09-15
+    status: accepted
+    rationale: >
+      Stability and auditability require pinning governance workflows to tags and bumping via a
+      workflow or PR (never floating refs).
+    links: {}
+
+  - id: DEC-2025-0006
+    title: Progressive strictness; approvals and rulesets later
+    date: 2025-09-15
+    status: accepted
+    rationale: >
+      Keep early repos productive with lenient defaults; add approvals, strict rulesets, and CODEOWNER
+      gates as CI stabilizes and teams are ready.
+    links: {}
+
+  - id: DEC-2025-0007
+    title: Deprecate and archive vo2-governance in favor of engineering-governance
+    date: 2025-09-15
+    status: accepted
+    rationale: >
+      Remove duplicative governance repositories to avoid confusion and drift; leave clear pointer to
+      engineering-governance.
+    links:
+      repo: https://github.com/paulkiley/vo2-governance

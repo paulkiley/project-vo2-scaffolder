@@ -21,4 +21,3 @@ List positive, negative, and neutral outcomes.
 ## Alternatives Considered
 
 Briefly describe other options and why they weren’t chosen.
-

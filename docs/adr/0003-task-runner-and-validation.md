@@ -25,4 +25,3 @@ We need ergonomic local workflows and CI-friendly validation.
 
 - Make: works, but ergonomics and cross-platform quirks are less ideal
 - Bazel/Pants: heavy for this repo’s scope
-

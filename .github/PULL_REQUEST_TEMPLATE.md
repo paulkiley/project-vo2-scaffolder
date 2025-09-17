@@ -3,7 +3,7 @@
 Describe the change and why it’s needed.
 
 ## Changes
-- 
+-
 
 ## Checklist
 - [ ] CI green
@@ -13,4 +13,4 @@ Describe the change and why it’s needed.
 
 ## Related
 - Closes #
-- ADR: 
+- ADR:

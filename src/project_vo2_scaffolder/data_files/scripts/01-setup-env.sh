@@ -44,4 +44,3 @@ info "Installing dependencies..."
 # shellcheck disable=SC2154
 "$VENV_DIR/bin/uv" pip install Jinja2 || error "Failed to install Jinja2."
 success "Dependencies installed."
-

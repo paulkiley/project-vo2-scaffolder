@@ -37,6 +37,16 @@ copier DEST:
 verify:
   bash ./verify.sh
 
+# Work ledger helpers
+work-list:
+  python3 ./scripts/work.py list
+
+work-validate:
+  python3 ./scripts/work.py validate
+
+context:
+  bash ./scripts/context_bundle.sh
+
 # Render Jinja2 templates into OUT (defaults to CWD)
 # Usage: just render CONTEXT=path/to/context.yaml [OUT=./dist] [IN=./templates]
 render CONTEXT OUT?=.: IN?=./src/project_vo2_scaffolder/data_files/templates:
@@ -57,3 +67,22 @@ publish-testpypi:
   python -m pip install --upgrade twine
   TWINE_USERNAME=__token__ TWINE_PASSWORD=${TEST_PYPI_API_TOKEN:?Set TEST_PYPI_API_TOKEN} \
     python -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+# Show the Agent Onboarding & Operations Manual directive JSONL
+show-onboarding-directive:
+  cat ./.agent_workdir/directives/onboarding_and_operations_manual.jsonl
+
+# Nix helpers
+nix-info:
+  if ! command -v nix >/dev/null 2>&1; then echo "Nix not installed. See docs/REPO_SETUP.md#nix-quickstart"; exit 1; fi
+  nix --version
+  nix flake show
+
+nix-develop:
+  if ! command -v nix >/dev/null 2>&1; then echo "Nix not installed. See docs/REPO_SETUP.md#nix-quickstart"; exit 1; fi
+  echo "Entering Nix dev shell (exit with Ctrl-D)"
+  nix develop -c $SHELL
+
+nix-check:
+  if ! command -v nix >/dev/null 2>&1; then echo "Nix not installed. See docs/REPO_SETUP.md#nix-quickstart"; exit 1; fi
+  nix flake check

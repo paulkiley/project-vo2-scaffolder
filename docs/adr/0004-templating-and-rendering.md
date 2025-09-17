@@ -25,4 +25,3 @@ The scaffold includes documentation and artifacts that vary by project (names, v
 
 - Cookiecutter: widely used; Copier chosen for better update story
 - Homegrown templating: higher maintenance, fewer features
-
